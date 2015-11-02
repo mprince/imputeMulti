@@ -41,7 +41,7 @@ count_levels <- function(dat, enum_list, hasNA= c("no", "count.obs", "count.miss
 par_count_compare <- function(nnodes, x, dat, hasNA) {
   cl <- makeCluster(nnodes)
   out <- do.call("c", clusterApply(cl, x= parallel:::splitRows(x, nnodes),
-                        fun= count_compare, dat= dat2, hasNA= hasNA))
+                        fun= imputeMulti:::count_compare, dat= dat2, hasNA= hasNA))
   stopCluster(cl)
   return(out)
 }

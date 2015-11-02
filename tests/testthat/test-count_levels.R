@@ -31,13 +31,13 @@ test_that("count levels works with all missing data options... parallel = FALSE"
   rm(x1,x2,x3,x4,x5, mis.ind)
   dim(dat2) <- dim(dat)<- c(100, 5)
   dat <- data.frame(apply(dat, 2, function(x) as.factor(x)))
-
   enum <- expand.grid(sapply(dat, function(x) return(c(levels(x), NA))))
 
   cnt.comp <- count_levels(dat[complete.cases(dat),], enum_list= enum,
                            hasNA= "no", parallel= FALSE)
   cnt.ob <- count_levels(dat, enum_list= enum, hasNA= "count.obs", parallel= FALSE)
-  cnt.mis <- count_levels(dat, enum_list= enum, hasNA= "count.miss", parallel= FALSE)
+  cnt.mis <- count_levels(dat[!complete.cases(dat),], enum_list= enum,
+                          hasNA= "count.miss", parallel= FALSE)
 
   ### no missing data tests
   expect_equal(sum(cnt.comp$counts), sum(complete.cases(dat)))
@@ -74,12 +74,13 @@ test_that("count levels works with all missing data options... parallel = TRUE",
   rm(x1,x2,x3,x4,x5, mis.ind)
   dim(dat)<- c(100, 5)
   dat <- data.frame(apply(dat, 2, function(x) as.factor(x)))
-
   enum <- expand.grid(sapply(dat, function(x) return(c(levels(x), NA))))
+
   cnt.comp <- count_levels(dat[complete.cases(dat),], enum_list= enum,
                            hasNA= "no", parallel= TRUE)
   cnt.ob <- count_levels(dat, enum_list= enum, hasNA= "count.obs", parallel= TRUE)
-  cnt.mis <- count_levels(dat, enum_list= enum, hasNA= "count.miss", parallel= TRUE)
+  cnt.mis <- count_levels(dat[!complete.cases(dat),], enum_list= enum,
+                          hasNA= "count.miss", parallel= TRUE)
 
   ### no missing data tests
   expect_equal(sum(cnt.comp$counts), sum(complete.cases(dat)))
