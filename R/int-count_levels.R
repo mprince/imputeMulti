@@ -30,7 +30,7 @@ count_levels <- function(dat, enum_list, hasNA= c("no", "count.obs", "count.miss
   if (parallel == FALSE) {
     enum_list$counts <- count_compare(x= e2, dat= dat2, hasNA= hasNA)
   } else {
-    # [AW 10/20] resolve edge case when nnodes > nrow(x_missing)
+    # resolve edge case when nnodes > nrow(x_missing)
     nnodes <- min(nrow(enum_list), detectCores() - leave_cores)
     enum_list$counts <- par_count_compare(nnodes, x= e2, dat= dat2, hasNA= hasNA)
   }
