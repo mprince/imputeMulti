@@ -1,6 +1,7 @@
 
 library(testthat)
 library(imputeMulti)
+library(parallel)
 
 context("int- count_levels works")
 
@@ -29,7 +30,7 @@ test_that("count levels works with all missing data options... parallel = FALSE"
   mis.ind <- sample(1:length(dat), size= 75, replace= FALSE)
   dat[mis.ind] <- NA
   rm(x1,x2,x3,x4,x5, mis.ind)
-  dim(dat2) <- dim(dat)<- c(100, 5)
+  dim(dat)<- c(100, 5)
   dat <- data.frame(apply(dat, 2, function(x) as.factor(x)))
   enum <- expand.grid(sapply(dat, function(x) return(c(levels(x), NA))))
 
