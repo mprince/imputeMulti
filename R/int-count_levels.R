@@ -31,20 +31,16 @@ count_levels <- function(dat, enum_list, hasNA= c("no", "count.obs", "count.miss
   } else {
     # resolve edge case when nnodes > nrow(x_missing)
     nnodes <- min(nrow(enum_list), detectCores() - leave_cores)
-    enum_list$counts <- par_count_compare(nnodes, x= e2, dat= dat2, hasNA= hasNA)
+    cl <- makeCluster(nnodes)
+    enum_list$counts <- do.call("c", clusterApply(cl,
+          x= parallel:::splitRows(e2, nnodes), fun= imputeMulti:::count_compare,
+          dat= dat2, hasNA= hasNA))
+    stopCluster(cl)
   }
   # return
   return(enum_list[!is.na(enum_list$counts) & enum_list$counts > 0,])
 }
 
-
-par_count_compare <- function(nnodes, x, dat, hasNA) {
-  cl <- makeCluster(nnodes)
-  out <- do.call("c", clusterApply(cl, x= parallel:::splitRows(x, nnodes),
-                        fun= imputeMulti:::count_compare, dat= dat2, hasNA= hasNA))
-  stopCluster(cl)
-  return(out)
-}
 
 # @description Compare an array with missing values \code{marg} and an array
 # with complete values \code{complete}. Return matching indices. Can compare
