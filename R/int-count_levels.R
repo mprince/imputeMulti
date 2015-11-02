@@ -56,7 +56,7 @@ par_count_compare <- function(nnodes, x, dat, hasNA) {
 # complete values/matches? Defaults to \code{FALSE} ie- complete values compared
 # to marginal matches.
 # @return A \code{list} of matches.
-marg_complete_compare <- function(marg, complete, marg_to_comp= FALSE) {
+marg_complete_compare <- function(marg, complete, marg_to_complete= FALSE) {
   ## 0. Pre-processing: convert factors to integers
   marg <- apply(marg, 2, as.integer)
   complete <- apply(complete, 2, as.integer)
