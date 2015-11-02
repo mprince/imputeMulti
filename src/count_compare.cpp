@@ -29,7 +29,7 @@ IntegerVector count_compare (IntegerMatrix& x, IntegerMatrix& dat, std::string& 
     for (int i = 0; i < nr_x; i++) {
         int cnt = 0;
       for (int j = 0; j < nr_dat; j++) {
-        if (is_true(all(x.row(i) == dat.row(j)))) ++cnt;
+        if (all(x.row(i) == dat.row(j))) ++cnt;
       }
       out[i] = cnt;
     }
