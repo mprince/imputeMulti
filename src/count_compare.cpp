@@ -59,10 +59,12 @@ IntegerVector count_compare (IntegerMatrix& x, IntegerMatrix& dat, std::string& 
         for (int k = 0; k < nc_x; k++) {
           if (x.row(i)[k] == NA_INTEGER) {
             x_na.push_back(k);
+          } else {
             x_exist.push_back(x.row(i)[k]);
           }
           if (dat.row(j)[k] == NA_INTEGER) {
             dat_na.push_back(k);
+          } else {
             dat_exist.push_back(dat.row(j)[k]);
           }
         }
