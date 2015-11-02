@@ -72,11 +72,11 @@ multinomial_em <- function(x_y, z_Os_y, enum_comp, n_obs,
                                         as.matrix(apply(enum_comp[, 1:count_p], 2, as.integer)),
                                     marg_to_comp= TRUE) # pattern match to complete
 
-      b_Os_y <- sum(enum_comp$theta_y[comp_ind])
-      E_Xsy_Zy_theta <- z_Os_y$counts[s] * enum_comp$theta_y[comp_ind] / b_Os_y # normalize
+      b_Os_y <- sum(enum_comp$theta_y[unlist(comp_ind)])
+      E_Xsy_Zy_theta <- z_Os_y$counts[s] * enum_comp$theta_y[unlist(comp_ind)] / b_Os_y # normalize
 
       # expected count += proportional marginally-observed
-      enum_comp$counts[comp_ind] <- enum_comp$counts[comp_ind] + E_Xsy_Zy_theta
+      enum_comp$counts[unlist(comp_ind)] <- enum_comp$counts[unlist(comp_ind)] + E_Xsy_Zy_theta
       # update log-lik
       if (b_Os_y > 0) {
         log_lik <- log_lik + z_Os_y$counts[s] * log(b_Os_y)
