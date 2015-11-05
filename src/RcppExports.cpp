@@ -5,14 +5,37 @@
 
 using namespace Rcpp;
 
+// margCompCompareC
+NumericMatrix margCompCompareC(NumericMatrix& marg, NumericMatrix& comp);
+RcppExport SEXP imputeMulti_margCompCompareC(SEXP margSEXP, SEXP compSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericMatrix& >::type marg(margSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type comp(compSEXP);
+    __result = Rcpp::wrap(margCompCompareC(marg, comp));
+    return __result;
+END_RCPP
+}
+// sort_indexes
+std::vector<size_t> sort_indexes(std::vector<double>& values);
+RcppExport SEXP imputeMulti_sort_indexes(SEXP valuesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::vector<double>& >::type values(valuesSEXP);
+    __result = Rcpp::wrap(sort_indexes(values));
+    return __result;
+END_RCPP
+}
 // supDistCpp
-double supDistCpp(NumericVector x, NumericVector y);
+double supDistCpp(NumericVector& x, NumericVector& y);
 RcppExport SEXP imputeMulti_supDistCpp(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type y(ySEXP);
     __result = Rcpp::wrap(supDistCpp(x, y));
     return __result;
 END_RCPP
