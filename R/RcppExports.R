@@ -12,8 +12,3 @@ supDist <- function(x, y) {
 marg_comp_compare <- function(marg, complete, marg_to_complete = FALSE) {
     .Call('imputeMulti_marg_comp_compare', PACKAGE = 'imputeMulti', marg, complete, marg_to_complete)
 }
-
-which_na <- function(x) {
-    .Call('imputeMulti_which_na', PACKAGE = 'imputeMulti', x)
-}
-
