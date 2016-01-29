@@ -22,8 +22,8 @@ count_levels <- function(dat, enum_list, hasNA= c("no", "count.obs", "count.miss
   if (ncol(dat) != ncol(enum_list)) stop("ncol(dat) and ncol(enum_list) must match.")
 
   # convert from factors to integers
-  e2 <- apply(enum_list, 2, as.integer)
-  dat2 <- apply(dat, 2, as.integer)
+  e2 <- apply(enum_list, 2, fact_to_int)
+  dat2 <- apply(dat, 2, fact_to_int)
 
   # get counts
   if (parallel == FALSE) {
@@ -61,8 +61,8 @@ count_levels <- function(dat, enum_list, hasNA= c("no", "count.obs", "count.miss
 # @return A \code{list} of matches.
 marg_complete_compare <- function(marg, complete, marg_to_complete= FALSE) {
   ## 0. Pre-processing: convert factors to integers
-  marg <- apply(marg, 2, as.integer)
-  complete <- apply(complete, 2, as.integer)
+  marg <- apply(marg, 2, fact_to_int)
+  complete <- apply(complete, 2, fact_to_int)
 
   ## 1. Run code in C
   .Call('imputeMulti_marg_comp_compare', PACKAGE = 'imputeMulti',
