@@ -1,3 +1,13 @@
+
+
+# convert a factor-vector to an integer vector, where the integers correspond
+# to the levels of the factor.
+fact_to_int <- function(f) {
+  l <- c(levels(f), NA)
+  return(unlist(sapply(f, function(i) {
+    ifelse(is.na(i), length(l), which(i == l[-length(l)]))})))
+}
+
 #### internal
 # @title Count Levels
 # @description Given a dataset and a data.frame of comparison patterns,

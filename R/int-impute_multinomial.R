@@ -33,21 +33,3 @@ impute_multinomial_all <- function(dat_miss, MLEx_y, p) {
   return(dat_miss)
 }
 
-# convert a factor-vector to an integer vector, where the integers correspond
-# to the levels of the factor.
-fact_to_int <- function(f) {
-  l <- c(levels(f), NA)
-  return(unlist(sapply(f, function(i) which(i == l))))
-}
-
-
-
-
-
-
-
-
-
-
-
-
